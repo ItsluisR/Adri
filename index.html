@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre de San Valentín</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e0b3ff;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+      }
+      .container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        cursor: pointer;
+        z-index: 2;
+      }
+      .envelope {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #9b59b6;
+        border-radius: 10px;
+        border: 3px solid #6c3483;
+        overflow: hidden;
+      }
+      .flap {
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        background-color: #bb8fce;
+        top: 0;
+        clip-path: polygon(0 0, 100% 0, 50% 100%);
+        transition: transform 0.5s;
+        transform-origin: top;
+      }
+      .container:hover .flap {
+        transform: rotateX(180deg);
+      }
+      .card {
+        position: absolute;
+        width: 80%;
+        height: 60%;
+        background-color: white;
+        border-radius: 10px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        color: #6c3483;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        opacity: 0;
+        transition: transform 0.5s, opacity 0.5s;
+      }
+      .container:hover .card {
+        transform: translate(-50%, -120%);
+        opacity: 1;
+      }
+      .hearts {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .heart {
+        position: absolute;
+        bottom: -20px;
+        width: 20px;
+        height: 20px;
+        background-color: #9b59b6;
+        transform: rotate(-45deg);
+        animation: floatUp 5s linear infinite;
+      }
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #9b59b6;
+        border-radius: 50%;
+      }
+      .heart::before {
+        top: -10px;
+        left: 0;
+      }
+      .heart::after {
+        left: 10px;
+        top: 0;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) rotate(-45deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(-45deg);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hearts"></div>
+    <div class="container" onclick="redirect()">
+      <div class="envelope">
+        <div class="flap"></div>
+      </div>
+      <div class="card">💜 ¡Feliz San Valentín Adri! 💜</div>
+    </div>
+    <script>
+      function redirect() {
+        window.location.href = "libro.html";
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        const heartsContainer = document.querySelector(".hearts");
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.style.left = `${Math.random() * 100}%`;
+          heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+          heartsContainer.appendChild(heart);
+        }
+      });
+    </script>
+  </body>
+</html>
